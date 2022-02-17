@@ -1,6 +1,8 @@
 '''This script detects if a person is drowsy or not,using dlib and eye aspect ratio
 calculations. Uses webcam video feed as input.'''
 
+#token github: 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
+
 #Import necessary libraries
 from paho.mqtt import client as mqtt_client
 from scipy.spatial import distance
@@ -11,12 +13,12 @@ import time
 import dlib
 import cv2
 import random
-
+import getpass
 
 #Variables para publicar en MQTT
-broker = 'localhost'
+broker = '3.126.191.185'
 port = 1883
-topic = "python/mqtt"
+topic = "somnolencia/mqtt"
 
 # generate client ID with pub prefix randomly
 client_id = f'python-mqtt-{random.randint(0, 100)}'
@@ -53,7 +55,9 @@ def connect_mqtt() -> mqtt_client:
 
 #Función para publicar en el broker MQTT, se utiliza un topic conocido para poder leerlo por fuera
 def publish(client):
-    msg = f"Conductor dormido"
+    usr_name = getpass.getuser()
+    msg = f"Conductor dormido:"
+    msg += " " + usr_name
     result = client.publish(topic, msg)
     status = result[0]
     if status == 0:
@@ -136,7 +140,7 @@ while(True):
             if COUNTER >= EYE_ASPECT_RATIO_CONSEC_FRAMES:
                 pygame.mixer.music.play(-1)
                 enviar_mensaje_central();
-                cv2.putText(frame, "You are Drowsy", (150,200), cv2.FONT_HERSHEY_SIMPLEX, 1.5, (0,0,255), 2)
+                cv2.putText(frame, "Somnolencia detectada", (150,200), cv2.FONT_HERSHEY_SIMPLEX, 1.5, (0,0,255), 2)
         else:
             pygame.mixer.music.stop()
             COUNTER = 0
