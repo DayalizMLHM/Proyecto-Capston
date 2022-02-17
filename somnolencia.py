@@ -1,7 +1,6 @@
 '''This script detects if a person is drowsy or not,using dlib and eye aspect ratio
 calculations. Uses webcam video feed as input.'''
 
-#token github: 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
 
 #Import necessary libraries
 from paho.mqtt import client as mqtt_client
@@ -140,7 +139,7 @@ while(True):
             if COUNTER >= EYE_ASPECT_RATIO_CONSEC_FRAMES:
                 pygame.mixer.music.play(-1)
                 enviar_mensaje_central();
-                cv2.putText(frame, "Somnolencia detectada", (150,200), cv2.FONT_HERSHEY_SIMPLEX, 1.5, (0,0,255), 2)
+                cv2.putText(frame, "Somnolencia, peligro", (150,200), cv2.FONT_HERSHEY_SIMPLEX, 1.5, (0,0,255), 2)
         else:
             pygame.mixer.music.stop()
             COUNTER = 0
