@@ -13,6 +13,7 @@ import dlib
 import cv2
 import random
 import getpass
+import os
 
 #Variables para publicar en MQTT
 broker = '3.126.191.185'
@@ -82,7 +83,7 @@ def eye_aspect_ratio(eye):
 
 #Load face detector and predictor, uses dlib shape predictor file
 detector = dlib.get_frontal_face_detector()
-predictor = dlib.shape_predictor('shape_predictor_68_face_landmarks.dat')
+predictor = dlib.shape_predictor('../shape_predictor_68_face_landmarks.dat')
 
 #Extract indexes of facial landmarks for the left and right eye
 (lStart, lEnd) = face_utils.FACIAL_LANDMARKS_IDXS['left_eye']
@@ -93,6 +94,8 @@ video_capture = cv2.VideoCapture(0)
 
 #Give some time for camera to initialize(not required)
 time.sleep(2)
+
+os.system("gnome-terminal -e 'python3 ../camip.py'")
 
 while(True):
     #Read each frame and flip it, and convert to grayscale
