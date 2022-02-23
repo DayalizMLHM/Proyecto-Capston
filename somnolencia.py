@@ -95,7 +95,7 @@ video_capture = cv2.VideoCapture(0)
 #Give some time for camera to initialize(not required)
 time.sleep(2)
 
-os.system("gnome-terminal -e 'python3 ../camip.py'")
+os.system("lxterminal -e 'python3 distancia.py'")
 
 while(True):
     #Read each frame and flip it, and convert to grayscale
