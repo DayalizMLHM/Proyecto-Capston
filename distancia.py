@@ -7,8 +7,8 @@ import pygame
 
 #Initialize Pygame, load music and streaming video
 pygame.mixer.init()
-pygame.mixer.music.load('audio/alert.mp3')
-cap = cv2.VideoCapture('http://192.168.1.74:81/stream') #Cambiar por la IP y puerto asignados por tu modem
+pygame.mixer.music.load('audio/alert.wav')
+cap = cv2.VideoCapture('http://192.168.100.34:81/stream') #Cambiar por la IP y puerto asignados por tu modem
 
 #Configuraciones para leer el sensor ultrasónico
 GPIO.setmode(GPIO.BCM)
@@ -41,14 +41,19 @@ print("Inicia la toma de datos")
 try:
 	while True:
 		print("acerque el objeto para medir la distancia")
+		distance=CalcDistancia()
 		# si se alcanza cierta distancia sonar alarma e iniciar transmicion de la ESP32
-		while(CalcDistancia() < 200): #Dos metros de distancia
+		while(distance <= 100): #Un metro de distancia
 			pygame.mixer.music.play(-1)
 			print("Hay un objeto demaciado cerca")
 			while(True):
 				ret, frame = cap.read()
 				cv2.imshow('ESP32CAM',frame)
-				if cv2.waitKey(1) & 0xFF == ord('q') or CalcDistancia()>200:
+				distance=CalcDistancia()
+				if cv2.waitKey(1) & 0xFF == ord('q') or distance>101:
+					##cv2.destroyWindow('ESP32CAM')
+					##cap.release()
+					cv2.destroyAllWindows()
 					break
 		pygame.mixer.music.stop()
 		
