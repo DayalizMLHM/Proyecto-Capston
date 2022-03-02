@@ -6,6 +6,7 @@ calculations. Uses webcam video feed as input.'''
 from paho.mqtt import client as mqtt_client
 from scipy.spatial import distance
 from imutils import face_utils
+from datetime import datetime
 import numpy as np
 import pygame #For playing sound
 import time
@@ -18,7 +19,7 @@ import os
 #Variables para publicar en MQTT
 broker = '3.126.191.185'
 port = 1883
-topic = "somnolencia/mqtt"
+#topic = "somnolencia/mqtt"
 
 # generate client ID with pub prefix randomly
 client_id = f'python-mqtt-{random.randint(0, 100)}'
@@ -54,10 +55,14 @@ def connect_mqtt() -> mqtt_client:
     return client
 
 #Función para publicar en el broker MQTT, se utiliza un topic conocido para poder leerlo por fuera
-def publish(client):
+def publish(client, topic, counter):
     usr_name = getpass.getuser()
-    msg = f"Conductor dormido:"
-    msg += " " + usr_name
+    #formato_Mensaje: ' nombre;counter;fecha '
+    msg = usr_name + ";"
+    msg += str(counter) + ";"
+    msg += str(datetime.now())
+    
+    print(msg)
     result = client.publish(topic, msg)
     status = result[0]
     if status == 0:
@@ -65,10 +70,10 @@ def publish(client):
     else:
         print(f"Failed to send message to topic {topic}")
 
-def enviar_mensaje_central():
+def enviar_mensaje_central(topic, counter):
     client = connect_mqtt()
     client.loop_start()
-    publish(client)
+    publish(client, topic, counter)
     client.loop_stop(True)
 
 
@@ -95,7 +100,7 @@ video_capture = cv2.VideoCapture(0)
 #Give some time for camera to initialize(not required)
 time.sleep(2)
 
-os.system("lxterminal -e 'python3 distancia.py'")
+#os.system("lxterminal -e 'python3 distancia.py'")
 
 while(True):
     #Read each frame and flip it, and convert to grayscale
@@ -139,9 +144,16 @@ while(True):
         if(eyeAspectRatio < EYE_ASPECT_RATIO_THRESHOLD):
             COUNTER += 1
             #If no. of frames is greater than threshold frames,
+            contador = 0
             if COUNTER >= EYE_ASPECT_RATIO_CONSEC_FRAMES:
+                contador += 1;
                 pygame.mixer.music.play(-1)
-                enviar_mensaje_central();
+                #
+                #poner su nombre en lugar del mio
+                # linea 154
+                topic = "somnolencia/luisangel"
+                enviar_mensaje_central(topic, contador);
+                #enviar_mensaje_central();
                 cv2.putText(frame, "Somnolencia, peligro", (150,200), cv2.FONT_HERSHEY_SIMPLEX, 1.5, (0,0,255), 2)
         else:
             pygame.mixer.music.stop()
