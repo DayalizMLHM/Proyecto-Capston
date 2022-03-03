@@ -2,13 +2,8 @@ import RPi.GPIO as GPIO
 import numpy as np
 import time
 import cv2
-from datetime import datetime
-import pygame
 
-#Initialize Pygame, load music and streaming video
-pygame.mixer.init()
-pygame.mixer.music.load('audio/alert.wav')
-cap = cv2.VideoCapture('http://192.168.1.74:81/stream') #Cambiar por la IP y puerto asignados por tu modem
+#cap = cv2.VideoCapture('http://192.168.100.34:81/stream') #Cambiar por la IP y puerto asignados por tu modem
 
 #Configuraciones para leer el sensor ultrasónico
 GPIO.setmode(GPIO.BCM)
@@ -32,10 +27,6 @@ def CalcDistancia():
 	
 	return distance
 
-##sFileStamp = time.strftime('%Y%m%d%H')
-##sFileName = '\out' + sFileStamp + '.txt'
-##f=open(sFileName, 'a')
-##f.write('TimeStamp,Value' + '\n')
 print("Inicia la toma de datos")
 
 try:
@@ -43,41 +34,24 @@ try:
 		print("acerque el objeto para medir la distancia")
 		distance=CalcDistancia()
 		print( ' distanciacalculada ' + str(distance) )
-		time.sleep(1)
+		time.sleep(2)
 		# si se alcanza cierta distancia sonar alarma e iniciar transmicion de la ESP32
 		if(distance <= 100): #Un metro de distancia
-			pygame.mixer.music.play(-1)
+			cap = cv2.VideoCapture('http://192.168.100.34:81/stream') #Cambiar por la IP y puerto asignados
 			print("Hay un objeto demaciado cerca")
 			while(True):
 				ret, frame = cap.read()
 				cv2.imshow('ESP32CAM',frame)
 				distance=CalcDistancia()
 				print( ' entro ' + str(distance) )
-				time.sleep(0.2)
+				time.sleep(0.1)
 				if cv2.waitKey(1) & 0xFF == ord('q') or distance>100:
-					cv2.destroyWindow('ESP32CAM')
-					##cap.release()
-					##cv2.destroyAllWindows()
+					#cv2.destroyWindow('ESP32CAM')
+					cap.release()
+					cv2.destroyAllWindows()
 					break
-		else:
-			pygame.mixer.music.stop()
-		
-		##sTimeStamp = time.strftime('%Y%m%d%H%M%S')
-		##f.write(sTimeStamp + ',' + str(distance) + '\n')
-		##sTmpFileStamp = time.strftime('%Y%m%d%H')
-		##if sTmpFileStamp != sFileStamp:
-			##f.close
-			##sFileName = 'out/' + sTmpFileStamp + '.txt'
-			##f=open(sFileName, 'a')
-			##sFileStamp = sTmpFileStamp
-			##print("creando el archivo")
-		   	
 
 except KeyboardInterrupt:
 	print('\n' + 'termina la captura de datos.' + '\n')
-	##f.close
 	GPIO.cleanup()
 
-#Finally when video capture is over, release the video capture and destroyAllWindows
-cap.release()
-cv2.destroyAllWindows()

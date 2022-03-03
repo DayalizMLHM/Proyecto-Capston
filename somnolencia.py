@@ -155,8 +155,10 @@ while(True):
                 enviar_mensaje_central(topic, contador);
                 #enviar_mensaje_central();
                 cv2.putText(frame, "Somnolencia, peligro", (150,200), cv2.FONT_HERSHEY_SIMPLEX, 1.5, (0,0,255), 2)
+                enviar_mensaje_central(topic, 0);
         else:
             pygame.mixer.music.stop()
+
             COUNTER = 0
 
     #Show video feed
