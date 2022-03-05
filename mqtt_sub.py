@@ -5,9 +5,9 @@ import random
 from paho.mqtt import client as mqtt_client
 
 
-broker = '3.126.191.185'
+broker = 'broker.hivemq.com'
 port = 1883
-topic = "somnolencia/mqtt"
+topic = "somnolencia/miriam"
 # generate client ID with pub prefix randomly
 client_id = f'python-mqtt-{random.randint(0, 100)}'
 # username = 'emqx'

@@ -37,7 +37,7 @@ try:
 		time.sleep(2)
 		# si se alcanza cierta distancia sonar alarma e iniciar transmicion de la ESP32
 		if(distance <= 100): #Un metro de distancia
-			cap = cv2.VideoCapture('http://192.168.100.34:81/stream') #Cambiar por la IP y puerto asignados
+			cap = cv2.VideoCapture('http://192.168.1.74:81/stream') #Cambiar por la IP y puerto asignados
 			print("Hay un objeto demaciado cerca")
 			while(True):
 				ret, frame = cap.read()

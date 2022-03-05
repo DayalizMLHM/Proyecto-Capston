@@ -17,10 +17,10 @@ import getpass
 import os
 
 #Variables para publicar en MQTT
-broker = '3.126.191.185'
+broker = 'broker.hivemq.com'
 port = 1883
-#topic = "somnolencia/mqtt"
-
+topic = "somnolencia/luisangel"
+estado = 0 # 0 Despierto - 1 Dormido
 # generate client ID with pub prefix randomly
 client_id = f'python-mqtt-{random.randint(0, 100)}'
 
@@ -56,7 +56,8 @@ def connect_mqtt() -> mqtt_client:
 
 #Función para publicar en el broker MQTT, se utiliza un topic conocido para poder leerlo por fuera
 def publish(client, topic, counter):
-    usr_name = getpass.getuser()
+    #usr_name = getpass.getuser()
+    usr_name = "Luis Angel Sánchez Hernández"
     #formato_Mensaje: ' nombre;counter;fecha '
     msg = usr_name + ";"
     msg += str(counter) + ";"
@@ -144,22 +145,17 @@ while(True):
         if(eyeAspectRatio < EYE_ASPECT_RATIO_THRESHOLD):
             COUNTER += 1
             #If no. of frames is greater than threshold frames,
-            contador = 0
             if COUNTER >= EYE_ASPECT_RATIO_CONSEC_FRAMES:
-                contador += 1;
+                estado = 1
+                enviar_mensaje_central(topic, estado);
                 pygame.mixer.music.play(-1)
-                #
-                #poner su nombre en lugar del mio
-                # linea 154
-                topic = "somnolencia/luisangel"
-                enviar_mensaje_central(topic, contador);
-                #enviar_mensaje_central();
                 cv2.putText(frame, "Somnolencia, peligro", (150,200), cv2.FONT_HERSHEY_SIMPLEX, 1.5, (0,0,255), 2)
-                enviar_mensaje_central(topic, 0);
         else:
             pygame.mixer.music.stop()
-
             COUNTER = 0
+            if(estado == 1):
+                estado = 0
+                enviar_mensaje_central(topic, estado);
 
     #Show video feed
     cv2.imshow('Video', frame)
