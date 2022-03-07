@@ -1,7 +1,8 @@
 # Proyecto-Capstone: Detector de personas y vehiculos para trailers
 Integrantes del proyecto:
-Hernández Moreno Miriam Lizbeth
-Pérez Murillo Jose Luis
+* Hernández Moreno Miriam Lizbeth
+* Pérez Murillo Jose Luis
+* Sánchez Hernández Luis Angel
 
 ## Objetivos generales.
 * Comunicar mediante un sensor una transmisión que alerte en cadena a los vehículos que se encuentren dentro de cierto rango para alertar acerca de un posible accidente.
