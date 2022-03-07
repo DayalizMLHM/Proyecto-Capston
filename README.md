@@ -1,23 +1,53 @@
-# Proyecto-Capstone: Detector de personas y vehiculos para trailers
-Integrantes del proyecto:
+# Proyecto-Capstone: Sistema de prevención de accidentes para vehículos pesados
+
+## Integrantes del proyecto:
 * Hernández Moreno Miriam Lizbeth
 * Pérez Murillo Jose Luis
 * Sánchez Hernández Luis Angel
 
+## Descripción del proyecto: 
+En vehículos de gran tamaño, es normal que los conductores tengan muchos puntos ciegos que podrían provocar un terrible accidente, como se muestra a continuación:
+![image](https://user-images.githubusercontent.com/57678190/156950314-4c2b821d-7d2b-4de2-8325-ccd1cd20b200.png)
+![image](https://user-images.githubusercontent.com/57678190/156950545-39770f57-90d2-4898-b916-ad370149adad.png)
+
+Es por eso que se propone colocar sensores que calculen la distancia para mostrar al conductor con la ESP32Cam cuando algo esté extremadamente cerca, así mismo, dentro de la cabina se colocaría la cámara con la cual se realizará la detección de somnolencia.
+
 ## Objetivos generales.
-* Comunicar mediante un sensor una transmisión que alerte en cadena a los vehículos que se encuentren dentro de cierto rango para alertar acerca de un posible accidente.
-* Evitar accidentes con vehículos pesados mediante la detección de personas u objetos próximos en puntos ciegos (peatones, motocicletas, obstáculos, etc.)
-* Evitar accidentes automovilísticos provocados por los conductores que se quedan dormidos en el camino.
-## Objetivos específicos
-* Diseñar y construir el sistema de montaje para los sensores y microcontroladores utilizados en el sistema propuesto.
-* Implementar en un microcontrolador (ESP32 o quizá otro) el sistema de control y reconocimiento facial para la interfaz vehículo/conductor.
-* Implementar en un microcontrolador (ESP32 o quizá otro) el sistema de control en el volante del vehículo para la interfaz vehículo/conductor.
+* Monitorear con una cámara al operador del vehículo, mediante un detector de somnolencia.
+* Monitorear con un sensor ultrasónico la parte frontal del vehículo. 
+
+## Objetivos específicos:
+* Diseñar y construir el sistema de montaje para la cámara y el microcontrolador utilizado en el sistema propuesto.
+* Implementar en un microcontrolador el sistema de control y detector de somnolencia para la interfaz vehículo/conductor.
+* Implementar en un microcontrolador el sistema de control para un sensor ultrasónico.
 * Instalar y configurar un Bróker MQTT accesible desde Internet.
-* Implementar el módulo de comunicaciones para el envío de datos del microcontrolador (ESP32 CAM o quizá otro) y el Bróker MQTT empleando la red de Internet.
-* Implementar el módulo de comunicaciones para el envío de datos del sensor de proximidad a través de la tarjeta de desarrollo raspberry pi 4 y el bróker MQTT empleando la red de Internet.
-* Implementar la aplicación WEB que permita la monitorización en tiempo real de los parámetros observados empleando Node-RED.
+* Implementar un dashboard que permita la monitorización de “tiempo real” el estado del conductor.
+* Implementar una página web que permita captar video cuando el sensor ultrasónico detecte un nivel corto de proximidad.
 
 ## Justificación
-El internet de las cosas es fundamental en esta parte del proyecto ya que requiere una correcta comunicación entre sensores y dispositivos para notificar el accidente a las personas cercanas una vez que detecta la posible colisión.
-Una vez que los datos sean procesados un programa automáticamente se encargará de enviar la información a la gente cercana para que tenga precaución y tome las medidas necesarias.
-El sistema pretende a reducir la cantidad de accidentes por colisión provocados por un choque inicial, sin embargo, es poco útil si se implementa solamente en algunos vehículos, se debe tener en cuenta que dicho sistema tendría que estar implementado en todos los autos para que funcione de la mejor manera.
+
+Como anteriormente se mencionó este proyecto está pensado para disminuir la cantidad de accidentes viales que son causados por vehículos de gran tamaño, centrándose en primer lugar en aquellos que son provocados por el cansancio excesivo en los operadores, debido a las largas distancias que deben recorrer para llegar a sus destinos; como también de los puntos ciegos que este tipo de vehículos poseen.
+Es aquí cuando los avances tecnológicos pueden ayudar y mediante el internet de las cosas comunicar el estado actual del conductor y del vehículo hacia una central de monitoreo.
+
+## Productos:
+* Alerta de cansancio: Monitorear el estado del conductor y dar una alerta cuando este comience a presentar un nivel elevado de somnolencia. 
+* Dashboard en Node-Red: La emisión de la alerta enviara un mensaje a la central de monitoreo indicando el estado actual del conductor identificado por un id.
+* Detector de objetos cercanos: Control de objetos cercanos al vehículo que iniciara la transmisión-envio de datos por sensor radiofrecuencia
+
+## Servicios:
+* Identificar el estado de alerta del conductor.
+* Monitorización en tiempo real del estatus del vehículo.
+* Monitorización de los objetos cercanos al área del vehículo.
+
+
+## Dispositivos utilizados para realizar pruebas de ejecución
+* Raspberry Pi4B
+* Webcam Game Factor WG400
+* Bocinas BOC-067
+* Sensor ultrasónico
+* Computadora
+
+## Limitaciones técnicas
+Debido a lo que este proyecto pretende hacer, se puede puede ver limitado debido a algunos factores como: la potencia del microcontrolador que se propone utilizar y que para subir la señal se tiene que conectar a una red wifi, lo que implica una complejidad de diseño y presupuesto aún mayor. Entonces, si se llegan a mejorar estas limitantes se presentaría un producto con menores perdidas en los datos.
+Otra de las limitaciones a considerar es el envió de datos del sensor ultrasónico, dado que, al ser un sensor de mínima capacidad de rango para la detección de objetos cercanos, podría emitir una falsa alarma. 
+
