@@ -52,3 +52,13 @@ Es aquí cuando los avances tecnológicos pueden ayudar y mediante el internet d
 Debido a lo que este proyecto pretende hacer, se puede puede ver limitado debido a algunos factores como: la potencia del microcontrolador que se propone utilizar y que para subir la señal se tiene que conectar a una red wifi, lo que implica una complejidad de diseño y presupuesto aún mayor. Entonces, si se llegan a mejorar estas limitantes se presentaría un producto con menores perdidas en los datos.
 Otra de las limitaciones a considerar es el envió de datos del sensor ultrasónico, dado que, al ser un sensor de mínima capacidad de rango para la detección de objetos cercanos, podría emitir una falsa alarma. 
 
+##Librerías utilizadas
+
+## Referencias
+Bibliografía
+* Resumen boletines. (s/f). Instituto Mexicano del Transporte. Recuperado el 7 de marzo de 2022, de https://imt.mx/resumen-boletines.html?IdArticulo=334&IdBoletin=120
+
+* Rosebrock, A. (2017, mayo 8). Drowsiness detection with OpenCV. PyImageSearch. https://pyimagesearch.com/2017/05/08/drowsiness-detection-opencv/
+
+* Soukupová, T. (s/f). Real-time eye blink detection using facial landmarks. Uni-lj.si. Recuperado el 7 de marzo de 2022, de http://vision.fe.uni-lj.si/cvww2016/proceedings/papers/05.pdf
+
