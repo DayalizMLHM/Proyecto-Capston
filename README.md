@@ -42,6 +42,7 @@ Es aquí cuando los avances tecnológicos pueden ayudar y mediante el internet d
 
 ## Dispositivos utilizados para realizar pruebas de ejecución
 * Raspberry Pi4B
+* ESP32CAM
 * Webcam Game Factor WG400
 * Bocinas BOC-067
 * Sensor ultrasónico
