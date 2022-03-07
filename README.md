@@ -53,12 +53,16 @@ Debido a lo que este proyecto pretende hacer, se puede puede ver limitado debido
 Otra de las limitaciones a considerar es el envió de datos del sensor ultrasónico, dado que, al ser un sensor de mínima capacidad de rango para la detección de objetos cercanos, podría emitir una falsa alarma. 
 
 ##Librerías utilizadas
+* numpy
+* opencv
+* dlib
+* imutils
+* getpass
+* paho-mqtt
+* pygame
 
 ## Referencias
-Bibliografía
 * Resumen boletines. (s/f). Instituto Mexicano del Transporte. Recuperado el 7 de marzo de 2022, de https://imt.mx/resumen-boletines.html?IdArticulo=334&IdBoletin=120
-
 * Rosebrock, A. (2017, mayo 8). Drowsiness detection with OpenCV. PyImageSearch. https://pyimagesearch.com/2017/05/08/drowsiness-detection-opencv/
-
 * Soukupová, T. (s/f). Real-time eye blink detection using facial landmarks. Uni-lj.si. Recuperado el 7 de marzo de 2022, de http://vision.fe.uni-lj.si/cvww2016/proceedings/papers/05.pdf
 
