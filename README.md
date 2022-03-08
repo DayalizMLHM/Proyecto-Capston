@@ -8,7 +8,8 @@
 ## Descripción del proyecto: 
 En vehículos de gran tamaño, es normal que los conductores tengan muchos puntos ciegos que podrían provocar un terrible accidente, como se muestra a continuación:
 ![image](https://user-images.githubusercontent.com/57678190/156950314-4c2b821d-7d2b-4de2-8325-ccd1cd20b200.png)
-![image](https://user-images.githubusercontent.com/57678190/156950545-39770f57-90d2-4898-b916-ad370149adad.png)
+
+![17](https://user-images.githubusercontent.com/87503625/157335586-069ff374-6566-438c-845d-a77f5d177ad0.jpg)
 
 Es por eso que se propone colocar sensores que calculen la distancia para mostrar al conductor con la ESP32Cam cuando algo esté extremadamente cerca, así mismo, dentro de la cabina se colocaría la cámara con la cual se realizará la detección de somnolencia.
 
